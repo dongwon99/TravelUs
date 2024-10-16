@@ -1,0 +1,32 @@
+spring:
+
+  # Flyway 설정
+  flyway:
+    enabled: true
+    locations: classpath:db/
+    baseline-on-migrate: true
+    schemas: soltravel
+
+  # Multipart File 설정
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+# JWT 설정
+jwt:
+  secret: { JWT_SECRET_KEY }
+  expiration-time: 108000000
+
+# S3 설정
+cloud:
+  aws:
+    s3:
+      bucket: my-s3-mingyu
+    stack:
+      auto: false
+    region:
+      static: ap-southeast-2

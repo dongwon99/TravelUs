@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: v2
+
+  mvc:
+    servlet:
+      path: /api/v2
+    async:
+      request-timeout: 3000000

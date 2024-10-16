@@ -1,0 +1,57 @@
+/* 캘린더 자체 */
+.react-calendar {
+  width: 100%;
+  border: 0.1px solid #cccccc;
+  border-radius: 1px;
+  padding: 5px;
+  background-color: white;
+}
+
+/* 달력 년/월 표시 글씨 커스텀 */
+.react-calendar__navigation__label > span {
+  font-size: large;
+  font-weight: 700;
+  color: #565656;
+}
+
+/* 요일 section 커스텀 하기 */
+.react-calendar__month-view__weekdays {
+  background: white;
+  abbr {
+    color: black;
+    font-size: medium;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+/* day 타일 한개 한개 모양 커스텀하기 */
+.react-calendar__tile {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  /* border-radius: 50%; */
+  color: black;
+  font-size: medium;
+  font-weight: 500;
+  background: white;
+  text-align: center;
+  border-radius: 50%;
+}
+
+/* day 타일 hover, focus 시 모양 커스텀 */
+/* 날짜 선택 됐을 때 day 타일 커스텀하기 */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus,
+.react-calendar__tile--active {
+  /* color: #565656; */
+  background-color: #EBF1FF;
+}
+
+/* 달력에 오늘 표시 변경하기 */
+.react-calendar .react-calendar__tile--now {
+  /* background: #1429A0; */
+  /* color: white; */  
+  background-color: white;
+  border: 1px solid #1429A0;
+}

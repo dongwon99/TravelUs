@@ -1,0 +1,89 @@
+team:
+  private:
+    key: ${TEAM_PRIVATE_KEY}
+
+spring:
+  application:
+    name: bank
+
+  sql:
+    init:
+      mode: always
+
+  mvc:
+    servlet:
+      path: /api/v1/bank
+    async:
+      request-timeout: 3000000
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${BANK_DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      pool-name: hikari-pool
+      maximum-pool-size: 50
+      minimum-idle: 50
+      connection-timeout: 5000
+      connection-init-sql: SELECT 1
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      auto-commit: true
+
+  # JPA 설정
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        default_batch_fetch_size: 100 #fetch join 후 지연로딩하는 entity을 in 절로 미리 영속성 컨텍스트에 저장
+
+# Log 출력 설정
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      hibernate:
+        SQL: debug
+        type: trace
+
+---
+# 프로파일 dev-blue 설정
+spring:
+  config:
+    activate:
+      on-profile: blue
+
+server:
+  port: 8082  # blue 인스턴스의 포트
+
+---
+# 프로파일 dev-green 설정
+spring:
+  config:
+    activate:
+      on-profile: green
+
+server:
+  port: 8083  # green 인스턴스의 포트
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info  # 헬스체크와 정보 엔드포인트를 노출
+  endpoint:
+    health:
+      show-details: always     # health 엔드포인트에서 세부 정보 표시
+
